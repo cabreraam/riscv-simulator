@@ -6,7 +6,7 @@
 cpu::cpu() {
     cpu_sram = new mem();
     cpu_alu = new alu();
-    cpu_regs = new reg();
+    cpu_regs = std::make_unique<reg>();
     cpu_regs -> set_reg(cpu_regs -> PC, 0);
 }
 
@@ -19,7 +19,7 @@ cpu::cpu(uint8_t *code, int n) {
     }
     cpu_sram = new mem();
     cpu_alu = new alu();
-    cpu_regs = new reg();
+    cpu_regs = std::make_unique<reg>();
     cpu_regs -> set_reg(cpu_regs -> PC, 0);
     code_region = code;
     code_num = n;
@@ -32,7 +32,7 @@ cpu::cpu(uint8_t *code, int n, uint32_t pc) {
         return;
     }
     cpu_alu = new alu();
-    cpu_regs = new reg();
+    cpu_regs = std::make_unique<reg>();
     code_num = n;
     if ((pc & 0x00000003) != 0){
         std::cout << "CPU: last 2 bits of init PC must be 00, now we start with PC = 0" << std::endl;

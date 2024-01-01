@@ -177,6 +177,10 @@ void translator::instructionToBin(string in_filename, string out_filename) {
     string line, s;
     while (getline(in, line)) {
         line = preprocess(line);
+        // each of these options checks to see if it's an instruction of the given type, e.g., loadAndStore.
+        // the return val of each f'n is a string. If the string is non-empty,
+        // then the insn is of that type and returns a string of 0's and 1's 
+        // representing the corresponding binary for the insn encontered.
         if ((s = loadAndStore(line)) != "") out <<  s << endl;
         else if ((s = branch(line)) != "") out <<  s << endl;
         else if ((s = AluI(line)) != "") out <<  s << endl;

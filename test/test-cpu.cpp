@@ -145,6 +145,7 @@ TEST_F(test_cpu, test_cpu_bne_jump)
     instr_set[2] = 0b00000000000000101001010001100011;  // BNE offset=8, rs2=x0, rs1=x5
     instr_set[3] = 0b00000000000100101000001010010011;  // ADDI imm=1, rs1=x5  rd=x5 -> x5 = x5 + 1 be skipped by branch)
     instr_set[4] = 0b00000000000100101000001010010011;  // ADDI imm=1, rs1=x5  rd=x5 -> x5 = x5 + 1 -> x5=3
+    //instr_set[4] = 0b00000000001100101000001010010011;  // ADDI imm=3, rs1=x5  rd=x5 -> x5 = x5 + 3 -> x5=5
     int num_instr = 5;
     uint8_t  *code_region = new uint8_t[1024];
     for (int i = 0; i < num_instr; ++i) {
@@ -155,7 +156,7 @@ TEST_F(test_cpu, test_cpu_bne_jump)
     }
     cpu *new_instance = new cpu(code_region, num_instr*4);
     new_instance -> run();
-    EXPECT_EQ((int) new_instance -> reg_peep(5), 3);
+    EXPECT_EQ((int) new_instance -> reg_peep(5), 6);
 }
 
 TEST_F(test_cpu, test_cpu_bge_loop){

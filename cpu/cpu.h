@@ -8,6 +8,7 @@
 #include "alu.h"
 #include "../mem/mem.h"
 #include <bitset>
+#include <memory>
 #ifndef RISCV_SIMULATOR_CPU_H
 #define RISCV_SIMULATOR_CPU_H
 
@@ -22,7 +23,7 @@ const uint8_t JAL = 0b01101111; // jal,               exp. jal  rd, imm
 const uint8_t JALR= 0b01100111; // jalr,              exp. jalr
 
 class cpu {
-    reg *cpu_regs;
+    std::unique_ptr<reg> cpu_regs;
     alu *cpu_alu;
     mem *cpu_sram;
     bool cpu_is_running = true;
