@@ -292,3 +292,6 @@ instance -> mem_peep(0x00000001);
 
 Have fun with this toy simulator!
 
+---
+
+[Link to unprivileged spec](https://drive.google.com/file/d/1s0lZxUZaa7eV_O0_WsZzaurFLLww7ou5/view)
